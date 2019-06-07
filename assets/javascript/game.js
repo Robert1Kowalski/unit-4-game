@@ -29,7 +29,11 @@ var previous = 0; // used in on.click funciton
 //3) Build target random_Result
 var startResetGame = function () {
     $(".crystals").empty();  // empty the function each time it runs 
-
+    var images = [ 
+    "assets/images/crystal-one.png",
+    "assets/images/crystal-2.png",
+    "assets/images/crystal-three.png",
+    "assets/images/crystal-four.png" ]
 
     random_result = Math.floor(Math.random() * 120) + 19;
 
@@ -46,8 +50,16 @@ for (var i = 0; i < 4; i++) {
     var crystal = $("<div>");
     crystal.attr({
         "class": 'crystal',
-        "data-random": randomNumber, //assigned dataRandom to each of the divs
+        "data-random": randomNumber,
+         //assigned dataRandom to each of the divs
     });
+    crystal.css({
+        "background-image":"url(' " + images[i] + " ')",
+        "background-size": "cover"
+
+    })
+
+
     
 
     $(".crystals").append(crystal);  //this should put 4 divs into "crystal" div on html
