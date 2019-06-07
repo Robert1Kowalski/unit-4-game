@@ -2,8 +2,8 @@
 // 2) every crystal needs to have a random number between 1-12
 // 3) A new number should be generated everytime we win or lost, to those 4 crystals 
 // 4) When clicking any CRYSTAL, it should be adding with the previous result until it equals to the total score
-//If it is greater than the random result, then we lost and decrememt a lost counter
-//If it is equal, then we increment a win counter
+// 5)If it is greater than the random result, then we lost and decrememt a lost counter
+//       If it is equal, then we increment a win counter
 
 
 
@@ -18,6 +18,7 @@
 var random_result;
 var lost;
 var win;
+var previous = 0; // used in on.click funciton
 
 
 
@@ -42,12 +43,32 @@ for (var i = 0; i < 4; i++) {
         "class": 'crystal',
         "data-random": randomNumber, //assigned dataRandom to each of the divs
     });
+    crystal.html(randomNumber);
+
     $(".crystals").append(crystal);  //this should put 4 divs into "crystal" div on html
 }
 
 //4) Create a click event that adds previous total to new amount 
-$(".crystal").on('click', function () {  //when we click any crystal, it should consolelog div.crystal
+//5 Built the if/else statement -- if 
+$(".crystal").on('click', function () {  
 
-    console.log($(this).attr('data-random')       //were set a value called data random, and we want the value associated with dataRandom. the .attr will get the value from datavalue, and then "this" console logs the value on the click 
-)})
+    var num =  parseInt($(this).attr('data-random')); // create a varible to store the number, add parseint to convert the strings to numbers 
+    previous += num;
+    console.log(previous)
 
+    if (previous > random_result){
+        console.log("you lost")
+    }
+    else if (previous === random_result){
+        console.log("you win")
+    }
+})
+
+
+    
+
+    //console.log($(this).attr('data-random')       //we set a value called datarandom, and we want the value associated with dataRandom (ge nerated by our randomNumber). the .attr will get the value from datavalue, and then "this" console logs the value on the click 
+
+
+
+//5 Built the if/else statement and trigger page reset  
