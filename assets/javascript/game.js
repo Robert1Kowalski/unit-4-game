@@ -16,8 +16,8 @@
 
 // create random result, lost, win variables 
 var random_result;
-var lost;
-var win;
+var lost = 0;
+var win = 0; 
 var previous = 0; // used in on.click funciton
 
 
@@ -25,9 +25,14 @@ var previous = 0; // used in on.click funciton
 
 //1A) build 4 crystals
 //1B) build randomResult
+// 2) create randomNumber
 //3) Build target random_Result
-random_result = Math.floor(Math.random() * 120) + 19;
-//builds target randomResult 
+var startResetGame = function () {
+    $(".crystals").empty();  // empty the function each time it runs 
+
+
+    random_result = Math.floor(Math.random() * 120) + 19;
+
 console.log(random_result)
 $("#result").html('Random Result: ' + random_result)
 
@@ -36,33 +41,64 @@ $("#result").html('Random Result: ' + random_result)
 // 2) create randomNumber
 for (var i = 0; i < 4; i++) {
 
-    var randomNumber = Math.floor(Math.random() * 12) + 19; // built out randomNumber generator, will asign a randomNumber to each div
+    var randomNumber = Math.floor(Math.random() * 12) + 1; // built out randomNumber generator, will asign a randomNumber to each div
 
     var crystal = $("<div>");
     crystal.attr({
         "class": 'crystal',
         "data-random": randomNumber, //assigned dataRandom to each of the divs
     });
-    crystal.html(randomNumber);
+    
 
     $(".crystals").append(crystal);  //this should put 4 divs into "crystal" div on html
+    
 }
+$("#previous").html("Total Score: "  + previous)
+
+}
+
+startResetGame();
+
+
+
+
 
 //4) Create a click event that adds previous total to new amount 
 //5 Built the if/else statement -- if 
-$(".crystal").on('click', function () {  
+
+
+
+
+
+
+$(document).on('click', ".crystal",  function () {  
 
     var num =  parseInt($(this).attr('data-random')); // create a varible to store the number, add parseint to convert the strings to numbers 
+
     previous += num;
-    console.log(previous)
+
+
+    $("#previous").html("Total Score: " + previous)
+    
+ 
+    
 
     if (previous > random_result){
-        console.log("you lost")
+        lost ++; 
+        $("#lost").html("You Lost: " + lost); //creates counter on html
+         previous = 0;  // have to use event delegation and set previous = zero b/c button stops working                                             after the first 
+    
+       startResetGame();
     }
     else if (previous === random_result){
-        console.log("you win")
+        win ++; 
+        $("#win").html("You won: " + win);
+        previous = 0;
+        
+        startResetGame();
+
     }
-})
+}) 
 
 
     
@@ -71,4 +107,4 @@ $(".crystal").on('click', function () {
 
 
 
-//5 Built the if/else statement and trigger page reset  
+ 
