@@ -24,8 +24,8 @@ var previous = 0; // used in on.click funciton
 
 
 //1A) build 4 crystals
-//1B) build randomResult
-// 2) create randomNumber
+//1B) build randomResult (number to hit)
+// 2) create randomNumber (number generated on crystal)
 //3) Build target random_Result
 var startResetGame = function () {
     $(".crystals").empty();  // empty the function each time it runs 
@@ -83,7 +83,8 @@ startResetGame();
 
 
 
-$(document).on('click', ".crystal",  function () {  
+$(document).on('click', ".crystal",  function () {  // have to use event delegation and set previous = zero b/c button stops working                                             after the first 
+    
 
     var num =  parseInt($(this).attr('data-random')); // create a varible to store the number, add parseint to convert the strings to numbers 
 
@@ -98,7 +99,7 @@ $(document).on('click', ".crystal",  function () {
     if (previous > random_result){
         lost ++; 
         $("#lost").html("You Lost: " + lost); //creates counter on html
-         previous = 0;  // have to use event delegation and set previous = zero b/c button stops working                                             after the first 
+         previous = 0;                                      
     
        startResetGame();
     }
@@ -115,7 +116,7 @@ $(document).on('click', ".crystal",  function () {
 
     
 
-    //console.log($(this).attr('data-random')       //we set a value called datarandom, and we want the value associated with dataRandom (ge nerated by our randomNumber). the .attr will get the value from datavalue, and then "this" console logs the value on the click 
+    //console.log($(this).attr('data-random')       //we set a value called datarandom, and we want the value associated with dataRandom (ge nerated by our randomNumber). the .attr will get the value from datavalue, and then "this" puts the value into var number 
 
 
 
