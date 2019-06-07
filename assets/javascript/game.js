@@ -46,8 +46,8 @@ for (var i = 0; i < 4; i++) {
 }
 
 //4) Create a click event that adds previous total to new amount 
-$(".crystal").on('click', function () {  //when we click any crystal, it should consolelog the amount
+$(".crystal").on('click', function () {  //when we click any crystal, it should consolelog div.crystal
 
-    console.log($(this));
-})
+    console.log($(this).attr('data-random')       //were set a value called data random, and we want the value associated with dataRandom. the .attr will get the value from datavalue, and then "this" console logs the value on the click 
+)})
 
